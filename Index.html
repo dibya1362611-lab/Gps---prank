@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GPS Permission Demo</title>
+<style>
+body {
+    background: #080808;
+    color: #00ff88;
+    font-family: monospace;
+    text-align: center;
+    padding: 40px 15px;
+}
+.box {
+    border: 1px solid #00ff88;
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 60px;
+}
+button {
+    background: #00ff88;
+    padding: 14px 25px;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+}
+#result {
+    color: white;
+    margin-top: 25px;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+
+<h2>GPS SECURITY LAB</h2>
+
+<p>This demo requests access to your location.</p>
+
+<button onclick="getLocation()">
+SHARE MY LOCATION
+</button>
+
+<div id="result"></div>
+</div>
+
+<script>
+function getLocation() {
+    let result = document.getElementById("result");
+
+    if (!navigator.geolocation) {
+        result.innerHTML = "Location unavailable";
+        return;
+    }
+
+    result.innerHTML = "Requesting permission...";
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            result.innerHTML =
+            "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude +
+            "<br><br>😂 GOTCHA! JUST A PRANK!";
+        },
+        function() {
+            result.innerHTML =
+            "Permission denied. No location collected.";
+        }
+    );
+}
+</script>
+
+</body>
+</html>
